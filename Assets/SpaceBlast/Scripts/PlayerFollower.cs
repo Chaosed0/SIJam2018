@@ -70,7 +70,6 @@ public class PlayerFollower : MonoBehaviour
         if (currentPath != null)
         {
             Vector3 relative = currentPath[currentPathIndex + 1].transform.position - transform.position;
-            Debug.Log(relative);
             if (relative.sqrMagnitude < closeDistance * closeDistance)
             {
                 currentPathIndex++;

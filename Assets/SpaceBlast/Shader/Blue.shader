@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Pixelation"
+﻿Shader "Hidden/Blue"
 {
 	Properties
 	{
@@ -15,14 +15,13 @@
 			#include "UnityCG.cginc"
 
 			sampler2D _MainTex;	
-			float2 BlockCount;
-			float ColorStep;
-			int blue;
 
 			fixed4 frag (v2f_img i) : SV_Target
 			{
-				float4 tex = tex2D(_MainTex, floor(i.uv * BlockCount) / BlockCount + 1 / (BlockCount * 2));
-				tex.rgb = round(tex.rgb * ColorStep) / ColorStep;
+				float4 tex = tex2D(_MainTex, i.uv);
+				tex.r = 0.0;
+				tex.g = 0.0;
+				tex.b = tex.b * 1.0;
 				return tex;
 			}
 			ENDCG

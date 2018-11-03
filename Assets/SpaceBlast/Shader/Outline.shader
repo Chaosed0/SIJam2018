@@ -5,6 +5,7 @@
 		_MainTex ("Texture", 2D) = "white" {}
 		_SceneTex("Scene Texture", 2D) = "white" {}
 		_OutlineDepthBuffer("Outline Depth Buffer", 2D) = "black" {}
+		_InnerColor("Inner Color", Color) = (1, 1, 1, 0)
 		_OutlineColor("Outline Color", Color) = (1, 0, 0, 0)
 		_OutlineStrength("Outline Strength", Float) = 2
 	}
@@ -50,23 +51,24 @@
 
 			half frag (v2f i) : SV_Target
 			{
-				const float blurIterations = 20;
+				const float blurIterations = 30;
 				float colorAmount = 0;
 				float outlineDepthSample = 0;
 
 				for (int j = 0; j < blurIterations; j++) 
 				{
-					float2 samplePosition = i.uv + float2((j - .5 * blurIterations) * _MainTex_TexelSize.x, 0);
+					float2 samplePosition = i.uv + float2((j - .5 * blurIterations) * _MainTex_TexelSize.x * (6.0 * (j / blurIterations)), 0);
 					colorAmount += tex2D(_MainTex, samplePosition).r / blurIterations;
 					outlineDepthSample = max(outlineDepthSample, tex2D(_OutlineDepthBuffer, samplePosition).x);
 				}
 
 				// Manual z test to cull against objects in front of the object being outlined
-				float sceneDepthSample = tex2D(_CameraDepthTexture, i.uv).x;
-				float depthDifference = outlineDepthSample - sceneDepthSample;
+				//float sceneDepthSample = tex2D(_CameraDepthTexture, i.uv).x;
+				//float depthDifference = outlineDepthSample - sceneDepthSample;
 
 				// There's a bit of fudge here, you get flickering on the outline sometimes otherwise
-				return (depthDifference < -0.001 ? 0.0 : colorAmount);
+				//return (depthDifference < -0.001 ? 0.0 : colorAmount);
+				return colorAmount;
 			}
 			ENDCG
 		}
@@ -95,12 +97,12 @@
 
 			sampler2D _MainTex;
 			sampler2D _SceneTex;
-			sampler2D _ClipTex;
 
 			// This has to be named _GrabTexture due to Unity convention.
 			sampler2D _GrabTexture;
 			float2 _GrabTexture_TexelSize;
 
+			float4 _InnerColor;
 			float4 _OutlineColor;
 			float _OutlineStrength;
 			
@@ -114,31 +116,27 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				const float blurIterations = 20;
+				const float blurIterations = 30;
 
-				if (tex2D(_MainTex, i.uv.xy).r > 0) 
+				/*if (tex2D(_MainTex, i.uv.xy).r > 0) 
 				{
 					return tex2D(_SceneTex, i.uv);
-				}
+				}*/
 
 				float colorAmount = 0;
 				float2 grabUv = i.uv;
 
-				#if UNITY_UV_STARTS_AT_TOP
-				grabUv.y = 1 - grabUv.y;
-				#endif
+				//#if UNITY_UV_STARTS_AT_TOP
+				//grabUv.y = 1 - grabUv.y;
+				//#endif
 
 				for (int j = 0; j < blurIterations; j++) 
 				{
 					// Render texture is upside down for some reason
-					colorAmount += tex2D(_GrabTexture, grabUv + float2(0, (j - .5 * blurIterations) * _GrabTexture_TexelSize.y)).r / blurIterations;
+					colorAmount += tex2D(_GrabTexture, grabUv + float2(0, (j - .5 * blurIterations) * _GrabTexture_TexelSize.y * (6.0 * (j / blurIterations)))).r / blurIterations;
 				}
 
-				if (tex2D(_ClipTex, i.uv).r > 0) {
-					return tex2D(_SceneTex, i.uv);
-				}
-
-				return lerp(tex2D(_SceneTex, i.uv), _OutlineColor, colorAmount * _OutlineStrength);
+				return lerp(tex2D(_SceneTex, i.uv), lerp(_OutlineColor, _InnerColor, colorAmount * 2), colorAmount * _OutlineStrength);
 			}
 			ENDCG
 		}
