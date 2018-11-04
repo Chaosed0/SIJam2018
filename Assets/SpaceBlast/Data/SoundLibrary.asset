@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5914d9139b1626946af2621bea4114dd, type: 3}
+  m_Name: SoundLibrary
+  m_EditorClassIdentifier: 
+  library:
+  - name: UIEnemyAlert
+    clips:
+    - {fileID: 8300000, guid: ce1e151c760e7044680a2b3a415aff98, type: 3}
+  - name: EnemyAttack
+    clips:
+    - {fileID: 8300000, guid: 9513c2b685cd1004289e660acbda33ee, type: 3}
+    - {fileID: 8300000, guid: 16158b75338458f4a8f583349c50845a, type: 3}
+    - {fileID: 8300000, guid: a4f2b877e20db3641a2ab02b6e3889ad, type: 3}
+    - {fileID: 8300000, guid: 6eef17eda5cc11947a846fc48c60be4d, type: 3}
+    - {fileID: 8300000, guid: 3af3c00d40b189943ae4affe78babd8d, type: 3}
+  - name: EnemyCloseAlert
+    clips:
+    - {fileID: 8300000, guid: 1cd3fd23db4e61844959f6f4995da832, type: 3}
+    - {fileID: 8300000, guid: b20e21a1252579e4c99c39dcf4f16e6a, type: 3}
+    - {fileID: 8300000, guid: d5282922198ac274fa4c694547403ec6, type: 3}
+    - {fileID: 8300000, guid: 9f19d798fd5959c42a3de8a8a340960b, type: 3}
+    - {fileID: 8300000, guid: 51f603b1e9e84ff48a5839868e510caa, type: 3}
+  - name: EnemyFarAlert
+    clips:
+    - {fileID: 8300000, guid: fcf8bb2b749f0294ebdcb31e506d3547, type: 3}
+    - {fileID: 8300000, guid: c46d147c0112369428dfec2299c855f9, type: 3}
+    - {fileID: 8300000, guid: 41e9ad65aea22c044b8873cf186f6879, type: 3}
+    - {fileID: 8300000, guid: 778c5727608ea8441932740bd4b46c70, type: 3}
+    - {fileID: 8300000, guid: 4b51d730f6011e641be2b72d65c0c9c2, type: 3}
+  - name: EngineLoop
+    clips:
+    - {fileID: 8300000, guid: 66a9ce9cb65061c459128ee7fee17a47, type: 3}
+  - name: EnginePowerup
+    clips:
+    - {fileID: 8300000, guid: 66a9ce9cb65061c459128ee7fee17a47, type: 3}
+    - {fileID: 8300000, guid: 43b9c88e8daa79e4092145f446ab6bc2, type: 3}
+  - name: LowImpact
+    clips:
+    - {fileID: 8300000, guid: b2e30353e0b5eab41890d848eafe1fc7, type: 3}
+    - {fileID: 8300000, guid: 2d98a17517a641147bbe00c67d1e7d6b, type: 3}
+    - {fileID: 8300000, guid: 2a0c4bd74a5eb1f46aa2ef06df0dc27a, type: 3}
+    - {fileID: 8300000, guid: 92a55c2e5fd39b048a7152d5e9d989fc, type: 3}
+  - name: MidImpact
+    clips:
+    - {fileID: 8300000, guid: 769a6d2bd2bf2754a9415dea0906593d, type: 3}
+    - {fileID: 8300000, guid: 69dfebf289fa79e49b7ba8753e051e7c, type: 3}
+    - {fileID: 8300000, guid: 090792f78a9ea1747a5200112e55587e, type: 3}
+    - {fileID: 8300000, guid: 404856663b24f6c4b9fc78687078c629, type: 3}
+  - name: HighImpact
+    clips:
+    - {fileID: 8300000, guid: eed1d6dfcd798c74c936e9b1c2fc6229, type: 3}
+    - {fileID: 8300000, guid: 2544dd70f4e50914ba95949277fe58a8, type: 3}
+  - name: JetBlast
+    clips:
+    - {fileID: 8300000, guid: bd0bbc335f4b9aa49b2a0d2db58c15f2, type: 3}
+  - name: JetBlastContinuous
+    clips:
+    - {fileID: 8300000, guid: 1db3c95db0208ad439d568f05a04b1c6, type: 3}
+  - name: GunBlast
+    clips:
+    - {fileID: 8300000, guid: 5658e5e5c30002d4e95451fbcfbf2bc9, type: 3}
+    - {fileID: 8300000, guid: 062f8136363734e4fbaec9610795b9d8, type: 3}
+    - {fileID: 8300000, guid: 4cec371694efa2147b0c5341325f8ee5, type: 3}
+    - {fileID: 8300000, guid: cb325dd119763a14fbf7aace64581fcb, type: 3}
+    - {fileID: 8300000, guid: 96ef0155925c1a744b55bdcb02a36435, type: 3}
+  - name: HeavyGunBlast
+    clips:
+    - {fileID: 8300000, guid: 57347a46800ad6f43ae77acbc3b7dab6, type: 3}
+    - {fileID: 8300000, guid: 49bd6558ba893c448a6a58ae1aa19513, type: 3}
+    - {fileID: 8300000, guid: 8b5107dc4c6e01442932327ad6ea8cb4, type: 3}
+    - {fileID: 8300000, guid: 5dc72b8ffac0546449f4f10c69b3689f, type: 3}
+    - {fileID: 8300000, guid: 2dc405b2a3e795d4691a2eb403cd0662, type: 3}

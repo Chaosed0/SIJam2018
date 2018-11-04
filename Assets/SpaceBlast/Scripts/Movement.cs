@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Movement : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class Movement : MonoBehaviour
     private float yaw = 0.0f;
     private bool bigThrust = false;
 
+    [System.Serializable]
+    public class AccelerationChangedEvent : UnityEvent<Vector3> { }
+    public AccelerationChangedEvent OnAccelerationChanged = new AccelerationChangedEvent();
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -31,6 +36,8 @@ public class Movement : MonoBehaviour
     {
         this.movement = movement.normalized;
         transform.rotation = transform.rotation * Quaternion.AngleAxis(yaw, Vector3.up);
+
+        OnAccelerationChanged.Invoke(this.movement);
     }
 
     public void DoBigThrust()

@@ -11,19 +11,18 @@ public class Gun : MonoBehaviour
     private GameObject player;
 
     [SerializeField]
-    private UnityEvent OnFire = new UnityEvent();
-
-    [SerializeField]
     private LayerMask layerMask;
 
     [SerializeField]
-    private float forceImparted = 200.0f;
+    private float forceImparted = 2000.0f;
 
     [HideInInspector]
     public bool canFire = false;
 
     [HideInInspector]
     public bool dealDamage = false;
+
+    public UnityEvent OnFire = new UnityEvent();
 
     public void Fire()
     {
@@ -51,16 +50,15 @@ public class Gun : MonoBehaviour
         {
             enemy.OnHit(gameObject);
         }
+        else if (rigidbody != null)
+        {
+            rigidbody.AddForceAtPosition((rigidbody.transform.position - this.transform.position).normalized * forceImparted, hitInfo.point, ForceMode.Force);
+        }
 
         BlastableDoor blastableDoor = rigidbody.GetComponent<BlastableDoor>();
         if (blastableDoor != null)
         {
             blastableDoor.OnBlast();
-        }
-
-        if (rigidbody != null)
-        {
-            rigidbody.AddForceAtPosition((rigidbody.transform.position - this.transform.position).normalized * forceImparted, hitInfo.point, ForceMode.Acceleration);
         }
 
         Health health = rigidbody.GetComponent<Health>();
