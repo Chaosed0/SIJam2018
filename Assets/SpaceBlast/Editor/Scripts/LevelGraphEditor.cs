@@ -68,7 +68,7 @@ public class LevelGraphEditor : Editor
 
                 Vector3 relative = n2.transform.position - n1.transform.position;
 
-                bool hit = Physics.BoxCast(n1.transform.position, new Vector3(0.5f, 0.5f, 0.01f), relative.normalized, Quaternion.LookRotation(relative.normalized), relative.magnitude, ~0, QueryTriggerInteraction.Ignore);
+                bool hit = Physics.BoxCast(n1.transform.position, new Vector3(0.5f, 0.5f, 0.01f), relative.normalized, Quaternion.LookRotation(relative.normalized), relative.magnitude, levelGraph.bakeLayerMask, QueryTriggerInteraction.Ignore);
                 // bool hit = Physics.BoxCast(n1.transform.position, new Vector3(0.6f, 0.3f, 0.01f), relative.normalized, Quaternion.LookRotation(relative.normalized), relative.magnitude, ~0, QueryTriggerInteraction.Ignore);
                 //bool hit = Physics.Raycast(n1.transform.position, relative.normalized, relative.magnitude, ~0, QueryTriggerInteraction.Ignore);
                 if (hit)

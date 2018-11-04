@@ -4,17 +4,17 @@ using System.Collections;
 
 public class PlayerTrigger : MonoBehaviour
 {
-    [SerializeField]
-    private UnityEvent OnPlayerEntered = new UnityEvent();
+    [System.Serializable]
+    public class PlayerEvent : UnityEvent<GameObject> { }
 
-    [SerializeField]
-    private UnityEvent OnPlayerExited = new UnityEvent();
+    public PlayerEvent OnPlayerEntered = new PlayerEvent();
+    public PlayerEvent OnPlayerExited = new PlayerEvent();
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            OnPlayerEntered.Invoke();
+            OnPlayerEntered.Invoke(other.gameObject);
         }
     }
 
@@ -22,7 +22,7 @@ public class PlayerTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            OnPlayerExited.Invoke();
+            OnPlayerExited.Invoke(other.gameObject);
         }
     }
 }

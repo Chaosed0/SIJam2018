@@ -19,8 +19,19 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private float forceImparted = 200.0f;
 
+    [HideInInspector]
+    public bool canFire = false;
+
+    [HideInInspector]
+    public bool dealDamage = false;
+
     public void Fire()
     {
+        if (!canFire)
+        {
+            return;
+        }
+
         OnFire.Invoke();
 
         RaycastHit hitInfo;
@@ -41,9 +52,21 @@ public class Gun : MonoBehaviour
             enemy.OnHit(gameObject);
         }
 
+        BlastableDoor blastableDoor = rigidbody.GetComponent<BlastableDoor>();
+        if (blastableDoor != null)
+        {
+            blastableDoor.OnBlast();
+        }
+
         if (rigidbody != null)
         {
-            rigidbody.AddForceAtPosition((rigidbody.transform.position - this.transform.position).normalized * forceImparted, hitInfo.point, ForceMode.Force);
+            rigidbody.AddForceAtPosition((rigidbody.transform.position - this.transform.position).normalized * forceImparted, hitInfo.point, ForceMode.Acceleration);
+        }
+
+        Health health = rigidbody.GetComponent<Health>();
+        if (health != null && dealDamage)
+        {
+            health.AddHealth(-9999f);
         }
     }
 }

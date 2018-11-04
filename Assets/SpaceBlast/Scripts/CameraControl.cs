@@ -30,6 +30,9 @@ public class CameraControl : MonoBehaviour
     private float hitTime = 0.0f;
     private bool ads = false;
 
+    [HideInInspector]
+    public bool scopeEnabled = false;
+
     private void Awake()
     {
         if (health != null)
@@ -51,6 +54,11 @@ public class CameraControl : MonoBehaviour
 
     public void SetAds(bool ads)
     {
+        if (!scopeEnabled)
+        {
+            return;
+        }
+
         if (this.ads != ads)
         {
             this.ads = ads;

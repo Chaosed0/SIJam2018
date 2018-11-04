@@ -30,8 +30,7 @@ public class LevelGraph : MonoBehaviour
     [SerializeField]
     private List<Edge> edges = new List<Edge>();
 
-    [SerializeField]
-    private LayerMask bakeLayerMask;
+    public LayerMask bakeLayerMask;
 
     private HashSet<Node> nodes = new HashSet<Node>();
     private Dictionary<Node, HashSet<Node>> neighborsMap = new Dictionary<Node, HashSet<Node>>();
