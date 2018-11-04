@@ -13,19 +13,36 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private UnityEvent OnFire = new UnityEvent();
 
+    [SerializeField]
+    private LayerMask layerMask;
+
+    [SerializeField]
+    private float forceImparted = 200.0f;
+
     public void Fire()
     {
         OnFire.Invoke();
 
         RaycastHit hitInfo;
-        bool hit = Physics.Raycast(transform.position, facingSource.transform.forward, out hitInfo, 5.0f, ~0, QueryTriggerInteraction.Ignore);
+        bool hit = Physics.SphereCast(transform.position, 0.5f, facingSource.transform.forward, out hitInfo, 5.0f, layerMask, QueryTriggerInteraction.Ignore);
         if (hit)
         {
-            Enemy enemy = hitInfo.collider.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemy.OnHit(gameObject);
-            }
+            OnHitAction(hitInfo);
+        }
+    }
+
+    void OnHitAction(RaycastHit hitInfo)
+    {
+        Enemy enemy = hitInfo.collider.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.OnHit(gameObject);
+        }
+
+        Rigidbody rb = hitInfo.collider.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.AddForceAtPosition((rb.transform.position - this.transform.position).normalized * forceImparted, hitInfo.point, ForceMode.Force);
         }
     }
 }

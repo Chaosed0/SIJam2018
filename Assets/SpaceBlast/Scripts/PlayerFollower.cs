@@ -13,6 +13,8 @@ public class PlayerFollower : MonoBehaviour
     [SerializeField]
     private float closeDistance = 0.5f;
 
+    private Rigidbody rb;
+
     private float lastRepathTime = 0f;
 
     private Pathfinder pathfinder;
@@ -21,10 +23,12 @@ public class PlayerFollower : MonoBehaviour
     private int currentPathIndex = -1;
 
     private GameObject target = null;
+    private Vector3 facing;
 
     void Awake()
     {
         pathfinder = GetComponent<Pathfinder>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -51,19 +55,18 @@ public class PlayerFollower : MonoBehaviour
             currentPathIndex = -1;
         }
 
-        Vector3 facing = Vector3.zero;
+        this.facing = Vector3.zero;
         if (goStraight)
         {
-            facing = target.transform.position - transform.position;
+            this.facing = target.transform.position - transform.position;
         }
         else if (currentPath != null)
         {
-            facing = currentPath[currentPathIndex + 1].transform.position - transform.position;
+            this.facing = currentPath[currentPathIndex + 1].transform.position - transform.position;
         }
 
         if (facing != Vector3.zero)
         {
-            transform.position += facing.normalized * speed * Time.deltaTime;
             transform.rotation = Quaternion.LookRotation(facing);
         }
 
@@ -79,6 +82,11 @@ public class PlayerFollower : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = facing.normalized * speed;
     }
 
     public void SetTarget(GameObject target)
