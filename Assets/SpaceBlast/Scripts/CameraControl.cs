@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Assets.Pixelation.Scripts;
 
 public class CameraControl : MonoBehaviour
 {
@@ -14,9 +13,6 @@ public class CameraControl : MonoBehaviour
     private Blue blue;
 
     [SerializeField]
-    private Pixelation normalPixelation;
-
-    [SerializeField]
     private float hitRollMin = 10.0f;
 
     [SerializeField]
@@ -24,6 +20,9 @@ public class CameraControl : MonoBehaviour
 
     [SerializeField]
     private float rollRecovery = 10f;
+
+    [SerializeField]
+    private Camera viewModelCamera;
 
     private float pitch = 0.0f;
     private float roll = 0.0f;
@@ -38,6 +37,7 @@ public class CameraControl : MonoBehaviour
         if (health != null)
         {
             health.OnHealthChanged.AddListener(OnHealthChanged);
+            health.OnDead.AddListener(OnDeath);
         }
     }
 
@@ -65,7 +65,6 @@ public class CameraControl : MonoBehaviour
 
             heatImagingCam.SetActive(ads);
             blue.enabled = ads;
-            normalPixelation.enabled = !ads;
         }
     }
 
@@ -75,5 +74,10 @@ public class CameraControl : MonoBehaviour
         {
             this.roll = Random.Range(hitRollMin, hitRollMax);
         }
+    }
+
+    public void OnDeath()
+    {
+        viewModelCamera.enabled = false;
     }
 }
