@@ -7987,6 +7987,8 @@ MonoBehaviour:
     node2: {fileID: 16703851}
   - node1: {fileID: 1106674029}
     node2: {fileID: 826777204}
+  - node1: {fileID: 826777204}
+    node2: {fileID: 92383249}
   bakeLayerMask:
     serializedVersion: 2
     m_Bits: 311
