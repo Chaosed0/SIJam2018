@@ -5,16 +5,21 @@ using System.Collections.Generic;
 public class SoundLibrary : ScriptableObject
 {
     [System.Serializable]
-    public struct Sound
+    public class Sound
     {
         public string name;
         public List<AudioClip> clips;
+
+        public AudioClip GetRandom()
+        {
+            return clips[(int)Random.Range(0f, clips.Count)];
+        }
     }
 
     [SerializeField]
     private List<Sound> library = new List<Sound>();
 
-    public AudioClip GetSound(string name)
+    public Sound GetSound(string name)
     {
         int index = library.FindIndex((x) => x.name == name);
         if (index < 0)
@@ -22,6 +27,6 @@ public class SoundLibrary : ScriptableObject
             return null;
         }
 
-        return library[index].clips[(int)Random.Range(0f, library[index].clips.Count)];
+        return library[index];
     }
 }

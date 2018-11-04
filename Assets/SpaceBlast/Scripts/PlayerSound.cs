@@ -22,26 +22,57 @@ public class PlayerSound : MonoBehaviour
     [SerializeField]
     private AudioSource moveContinuousJetAudioSource;
 
+    [SerializeField]
+    private AudioSource farawayScreechPrefab;
+
+    [SerializeField]
+    private float farawayRadius = 50.0f;
+
+    [SerializeField]
+    private float ambientScreechMin = 15.0f;
+
+    [SerializeField]
+    private float ambientScreechMax = 30.0f;
+
+    [SerializeField]
+    private bool ambientScreechOn = true;
+
     private Coroutine jetFadeCoroutine;
 
     private Vector3 oldAcceleration = Vector3.zero;
     private bool accelerationChanged = false;
 
+    private float lastAmbientScreechTime = 0f;
+    private float nextAmbientScreechTime = 0f;
+
+    private SoundLibrary.Sound heavyGunBlast;
+    private SoundLibrary.Sound gunBlast;
+    private SoundLibrary.Sound jetBlast;
+    private SoundLibrary.Sound enemyFarAlert;
+
     private void Awake()
     {
         gun.OnFire.AddListener(OnGunFire);
         movement.OnAccelerationChanged.AddListener(OnAccelerationChanged);
+
+        lastAmbientScreechTime = Time.time;
+        nextAmbientScreechTime = Random.Range(ambientScreechMin, ambientScreechMax);
+
+        heavyGunBlast = soundLibrary.GetSound("HeavyGunBlast");
+        gunBlast = soundLibrary.GetSound("GunBlast");
+        jetBlast = soundLibrary.GetSound("JetBlast");
+        enemyFarAlert = soundLibrary.GetSound("EnemyFarAlert");
     }
 
     private void OnGunFire()
     {
         if (gun.dealDamage)
         {
-            Play(gunBlastAudioSource.Get(), soundLibrary.GetSound("HeavyGunBlast"));
+            Play(gunBlastAudioSource.Get(), heavyGunBlast.GetRandom());
         }
         else
         {
-            Play(gunBlastAudioSource.Get(), soundLibrary.GetSound("GunBlast"));
+            Play(gunBlastAudioSource.Get(), gunBlast.GetRandom());
         }
     }
 
@@ -51,22 +82,34 @@ public class PlayerSound : MonoBehaviour
 
         if (newAcceleration.magnitude - oldAcceleration.magnitude > 0.5f)
         {
-            Play(moveBlastJetAudioSource, soundLibrary.GetSound("JetBlast"));
+            Play(moveBlastJetAudioSource, jetBlast.GetRandom());
         }
 
         if (newAcceleration.sqrMagnitude > Mathf.Epsilon && oldAcceleration.sqrMagnitude < Mathf.Epsilon)
         {
-            Debug.Log("Start");
             moveContinuousJetAudioSource.volume = newAcceleration.magnitude * 0.4f;
             moveContinuousJetAudioSource.Play();
         }
         else if (newAcceleration.sqrMagnitude < Mathf.Epsilon && oldAcceleration.sqrMagnitude > Mathf.Epsilon)
         {
-            Debug.Log("Stop");
             StartFade(moveContinuousJetAudioSource, 0.25f);
         }
 
         oldAcceleration = newAcceleration;
+    }
+
+    private void Update()
+    {
+        float interval = Time.time - lastAmbientScreechTime;
+        if (interval > nextAmbientScreechTime)
+        {
+            Vector3 position = Random.rotationUniform * (farawayRadius * Vector3.forward);
+            AudioSource source = Instantiate(farawayScreechPrefab, position, Quaternion.identity);
+            source.clip = enemyFarAlert.GetRandom();
+
+            lastAmbientScreechTime = Time.time;
+            nextAmbientScreechTime = Random.Range(ambientScreechMin, ambientScreechMax);
+        }
     }
 
     private void LateUpdate()

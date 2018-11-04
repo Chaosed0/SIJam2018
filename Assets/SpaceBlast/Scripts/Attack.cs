@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Events;
+using System.Collections.Generic;
 
 public class Attack : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class Attack : MonoBehaviour
     private bool isAttacking = false;
     private float lastAttackTime = 0.0f;
     private Health target = null;
+
+    public UnityEvent OnAttack = new UnityEvent();
 
     /*
     void Update()
@@ -46,6 +49,8 @@ public class Attack : MonoBehaviour
             Debug.LogError("Attacking with no target", this);
             return;
         }
+
+        OnAttack.Invoke();
 
         lastAttackTime = Time.time;
         target.AddHealth(-damageToDeal);

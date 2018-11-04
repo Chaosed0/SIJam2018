@@ -1641,6 +1641,12 @@ MonoBehaviour:
   gunBlastAudioSource: {fileID: 114057523514387052}
   moveBlastJetAudioSource: {fileID: 82319336199379482}
   moveContinuousJetAudioSource: {fileID: 82059569025549646}
+  farawayScreechPrefab: {fileID: 82085343111045746, guid: feb50894b6ff83e44a1bcfcb3746fbcf,
+    type: 2}
+  farawayRadius: 50
+  ambientScreechMin: 15
+  ambientScreechMax: 30
+  ambientScreechOn: 1
 --- !u!114 &114394796188091040
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -79,3 +79,6 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 8b5107dc4c6e01442932327ad6ea8cb4, type: 3}
     - {fileID: 8300000, guid: 5dc72b8ffac0546449f4f10c69b3689f, type: 3}
     - {fileID: 8300000, guid: 2dc405b2a3e795d4691a2eb403cd0662, type: 3}
+  - name: Notification
+    clips:
+    - {fileID: 8300000, guid: 6390b827ab8abae4ab93bcc8dc0e30b2, type: 3}

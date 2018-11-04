@@ -45,6 +45,11 @@ public class Gun : MonoBehaviour
     {
         Rigidbody rigidbody = hitInfo.collider.attachedRigidbody;
 
+        if (rigidbody == null)
+        {
+            return;
+        }
+
         Enemy enemy = rigidbody.GetComponent<Enemy>();
         if (enemy != null)
         {

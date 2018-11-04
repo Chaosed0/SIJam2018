@@ -21,6 +21,17 @@ public class CollisionSounder : MonoBehaviour
     [SerializeField]
     private LayerMask layerMask;
 
+    private SoundLibrary.Sound highImpact;
+    private SoundLibrary.Sound mediumImpact;
+    private SoundLibrary.Sound lowImpact;
+
+    private void Awake()
+    {
+        highImpact = library.GetSound("HighImpact");
+        mediumImpact = library.GetSound("MediumImpact");
+        lowImpact = library.GetSound("LowImpact");
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (((1 << layerMask.value) & collision.collider.gameObject.layer) == 0)
@@ -32,15 +43,15 @@ public class CollisionSounder : MonoBehaviour
         float magnitude = collision.relativeVelocity.magnitude;
         if (magnitude > highThreshold)
         {
-            audioClip = library.GetSound("HighImpact");
+            audioClip = highImpact.GetRandom();
         }
         else if (magnitude > mediumThreshold)
         {
-            audioClip = library.GetSound("MediumImpact");
+            audioClip = mediumImpact.GetRandom();
         }
         else if (magnitude > lowThreshold)
         {
-            audioClip = library.GetSound("LowImpact");
+            audioClip = lowImpact.GetRandom();
         }
 
         if (audioClip != null)
