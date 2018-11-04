@@ -16,6 +16,9 @@ public class Gun : MonoBehaviour
     [SerializeField]
     private float forceImparted = 2000.0f;
 
+    [SerializeField]
+    private float spread = 10.0f;
+
     [HideInInspector]
     public bool canFire = false;
 
@@ -33,17 +36,37 @@ public class Gun : MonoBehaviour
 
         OnFire.Invoke();
 
-        RaycastHit hitInfo;
-        bool hit = Physics.SphereCast(transform.position, 0.5f, facingSource.transform.forward, out hitInfo, 5.0f, layerMask, QueryTriggerInteraction.Ignore);
-        if (hit)
+        List<RaycastHit> raycastHits = new List<RaycastHit>();
+
+        for (int i = 0; i < 6; i++)
         {
-            OnHitAction(hitInfo);
+            RaycastHit hitInfo;
+            Vector3 axis = Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.forward) * Vector3.right;
+            Quaternion rotation = Quaternion.AngleAxis(Random.Range(-spread, spread), axis);
+            bool localHit = Physics.Raycast(transform.position, rotation * facingSource.transform.forward, out hitInfo, 5.0f, layerMask, QueryTriggerInteraction.Ignore);
+
+            Debug.DrawLine(transform.position, transform.position + rotation * facingSource.transform.forward * 5.0f);
+
+            if (localHit)
+            {
+                raycastHits.Add(hitInfo);
+            }
+        }
+
+        HashSet<Collider> collidersProcessed = new HashSet<Collider>();
+        foreach (RaycastHit hit in raycastHits)
+        {
+            if (!collidersProcessed.Contains(hit.collider))
+            {
+                collidersProcessed.Add(hit.collider);
+                OnHitAction(hit);
+            }
         }
     }
 
-    void OnHitAction(RaycastHit hitInfo)
+    void OnHitAction(RaycastHit hit)
     {
-        Rigidbody rigidbody = hitInfo.collider.attachedRigidbody;
+        Rigidbody rigidbody = hit.collider.attachedRigidbody;
 
         if (rigidbody == null)
         {
@@ -57,7 +80,7 @@ public class Gun : MonoBehaviour
         }
         else if (rigidbody != null)
         {
-            rigidbody.AddForceAtPosition((rigidbody.transform.position - this.transform.position).normalized * forceImparted, hitInfo.point, ForceMode.Force);
+            rigidbody.AddForceAtPosition((rigidbody.transform.position - this.transform.position).normalized * forceImparted, hit.point, ForceMode.Force);
         }
 
         BlastableDoor blastableDoor = rigidbody.GetComponent<BlastableDoor>();
