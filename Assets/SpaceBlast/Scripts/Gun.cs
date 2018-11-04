@@ -83,6 +83,12 @@ public class Gun : MonoBehaviour
             rigidbody.AddForceAtPosition((rigidbody.transform.position - this.transform.position).normalized * forceImparted, hit.point, ForceMode.Force);
         }
 
+        BlastReceiver blastReceiver = rigidbody.GetComponent<BlastReceiver>();
+        if (blastReceiver != null)
+        {
+            blastReceiver.DoBlast();
+        }
+
         BlastableDoor blastableDoor = rigidbody.GetComponent<BlastableDoor>();
         if (blastableDoor != null)
         {

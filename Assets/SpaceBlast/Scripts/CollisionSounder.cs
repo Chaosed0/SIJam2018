@@ -34,7 +34,7 @@ public class CollisionSounder : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (((1 << layerMask.value) & collision.collider.gameObject.layer) == 0)
+        if ((layerMask.value & collision.collider.gameObject.layer) == 0)
         {
             return;
         }
