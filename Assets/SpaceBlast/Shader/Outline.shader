@@ -53,15 +53,37 @@
 			{
 				const float blurIterations = 30;
 				float colorAmount = 0;
-				float outlineDepthSample = 0;
+				//float outlineDepthSample = 0;
 
+				/*
 				for (int j = 0; j < blurIterations; j++) 
 				{
-					float thing = j/blurIterations;
-					float2 samplePosition = i.uv + float2((j - .5 * blurIterations) * _MainTex_TexelSize.x * 6.0, 0);
+					float offset = 
+					float2 samplePosition = i.uv + float2((j - .5 * (blurIterations/2.0)) * _MainTex_TexelSize.x * 6.0, 0);
 					colorAmount += tex2D(_MainTex, samplePosition).r / blurIterations;
-					outlineDepthSample = max(outlineDepthSample, tex2D(_OutlineDepthBuffer, samplePosition).x);
+					//outlineDepthSample = max(outlineDepthSample, tex2D(_OutlineDepthBuffer, samplePosition).x);
 				}
+				*/
+
+				float2 tc = i.uv;
+				float hstep = 1.0;
+				float vstep = 0.0;
+				float radius = 8.0;
+				float sum = 0.0;
+				//blur radius in pixels
+                float blur = radius/1600.0;     
+
+                sum += tex2D(_MainTex, float2(tc.x - 4.0*blur*hstep, tc.y - 4.0*blur*vstep)).r * 0.0162162162;
+                sum += tex2D(_MainTex, float2(tc.x - 3.0*blur*hstep, tc.y - 3.0*blur*vstep)).r * 0.0540540541;
+                sum += tex2D(_MainTex, float2(tc.x - 2.0*blur*hstep, tc.y - 2.0*blur*vstep)).r * 0.1216216216;
+                sum += tex2D(_MainTex, float2(tc.x - 1.0*blur*hstep, tc.y - 1.0*blur*vstep)).r * 0.1945945946;
+
+                sum += tex2D(_MainTex, float2(tc.x, tc.y)).r * 0.2270270270;
+
+                sum += tex2D(_MainTex, float2(tc.x + 1.0*blur*hstep, tc.y + 1.0*blur*vstep)).r * 0.1945945946;
+                sum += tex2D(_MainTex, float2(tc.x + 2.0*blur*hstep, tc.y + 2.0*blur*vstep)).r * 0.1216216216;
+                sum += tex2D(_MainTex, float2(tc.x + 3.0*blur*hstep, tc.y + 3.0*blur*vstep)).r * 0.0540540541;
+                sum += tex2D(_MainTex, float2(tc.x + 4.0*blur*hstep, tc.y + 4.0*blur*vstep)).r * 0.0162162162;
 
 				// Manual z test to cull against objects in front of the object being outlined
 				//float sceneDepthSample = tex2D(_CameraDepthTexture, i.uv).x;
@@ -69,7 +91,7 @@
 
 				// There's a bit of fudge here, you get flickering on the outline sometimes otherwise
 				//return (depthDifference < -0.001 ? 0.0 : colorAmount);
-				return colorAmount;
+				return sum;
 			}
 			ENDCG
 		}
@@ -117,28 +139,33 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				const float blurIterations = 30;
-
-				/*if (tex2D(_MainTex, i.uv.xy).r > 0) 
-				{
-					return tex2D(_SceneTex, i.uv);
-				}*/
-
-				float colorAmount = 0;
+				float sum = 0;
 				float2 grabUv = i.uv;
 
 				//#if UNITY_UV_STARTS_AT_TOP
 				//grabUv.y = 1 - grabUv.y;
 				//#endif
 
-				for (int j = 0; j < blurIterations; j++) 
-				{
-					// Render texture is upside down for some reason
-					float thing = j / blurIterations;
-					colorAmount += tex2D(_GrabTexture, grabUv + float2(0, (j - .5 * blurIterations) * _GrabTexture_TexelSize.y * 6.0)).r / blurIterations;
-				}
+				float2 tc = grabUv;
+				float hstep = 0.0;
+				float vstep = 1.0;
+				float radius = 16.0;
+				//blur radius in pixels
+				float blur = radius/1600.0;
 
-				return lerp(tex2D(_SceneTex, i.uv), lerp(_OutlineColor, _InnerColor, colorAmount * 2), colorAmount * _OutlineStrength);
+				sum += tex2D(_GrabTexture, float2(tc.x - 4.0*blur*hstep, tc.y - 4.0*blur*vstep)).r * 0.0162162162;
+				sum += tex2D(_GrabTexture, float2(tc.x - 3.0*blur*hstep, tc.y - 3.0*blur*vstep)).r * 0.0540540541;
+				sum += tex2D(_GrabTexture, float2(tc.x - 2.0*blur*hstep, tc.y - 2.0*blur*vstep)).r * 0.1216216216;
+				sum += tex2D(_GrabTexture, float2(tc.x - 1.0*blur*hstep, tc.y - 1.0*blur*vstep)).r * 0.1945945946;
+
+				sum += tex2D(_GrabTexture, float2(tc.x, tc.y)).r * 0.2270270270;
+
+				sum += tex2D(_GrabTexture, float2(tc.x + 1.0*blur*hstep, tc.y + 1.0*blur*vstep)).r * 0.1945945946;
+				sum += tex2D(_GrabTexture, float2(tc.x + 2.0*blur*hstep, tc.y + 2.0*blur*vstep)).r * 0.1216216216;
+				sum += tex2D(_GrabTexture, float2(tc.x + 3.0*blur*hstep, tc.y + 3.0*blur*vstep)).r * 0.0540540541;
+				sum += tex2D(_GrabTexture, float2(tc.x + 4.0*blur*hstep, tc.y + 4.0*blur*vstep)).r * 0.0162162162;
+
+				return lerp(tex2D(_SceneTex, i.uv), lerp(_OutlineColor, _InnerColor, sum * 0.5), sum * _OutlineStrength);
 			}
 			ENDCG
 		}
