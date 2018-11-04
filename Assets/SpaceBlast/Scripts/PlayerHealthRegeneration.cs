@@ -34,7 +34,6 @@ public class PlayerHealthRegeneration : MonoBehaviour
         {
             lastHealTime = Time.time;
             health.AddHealth(regeneration);
-            Debug.Log("Regenerate");
         }
     }
 }

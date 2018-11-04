@@ -31,7 +31,6 @@ public class Health : MonoBehaviour
 
         if (oldHealth != this.health)
         {
-            Debug.Log("Health change " + oldHealth + " -> " + this.health);
             OnHealthChanged.Invoke(this.health, oldHealth);
 
             if (!isDead && this.health <= 0f)
