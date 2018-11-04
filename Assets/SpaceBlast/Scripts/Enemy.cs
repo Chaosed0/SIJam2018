@@ -91,6 +91,7 @@ public class Enemy : MonoBehaviour
             }
             else if (newState == State.Fleeing)
             {
+                animator.SetBool("IsFleeing", false);
                 flee.StartFleeing();
             }
 

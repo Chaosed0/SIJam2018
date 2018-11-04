@@ -23,10 +23,11 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Time.time - lastSpawnTime + " " + currentSpawnTime);
         if ((Time.time - lastSpawnTime) >= currentSpawnTime)
         {
-            Instantiate(objectToSpawn, transform.position, transform.rotation);
+            GameObject go = Instantiate(objectToSpawn, transform.position, transform.rotation);
+            go.SetActive(true);
+
             lastSpawnTime = Time.time;
             currentSpawnTime = Random.Range(minTime, maxTime);
         }

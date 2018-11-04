@@ -2045,8 +2045,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 778673672}
-  minTime: 10
-  maxTime: 15
+  minTime: 5
+  maxTime: 20
 --- !u!1 &129191276
 GameObject:
   m_ObjectHideFlags: 0
@@ -12062,7 +12062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn: {fileID: 778673672}
-  minTime: 20
+  minTime: 15
   maxTime: 35
 --- !u!4 &803262608
 Transform:
