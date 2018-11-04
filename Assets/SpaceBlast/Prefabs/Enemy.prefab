@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 114830950818984602}
   - component: {fileID: 54957000625973888}
   - component: {fileID: 114582189739324438}
+  - component: {fileID: 114346802657199036}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -191,6 +192,19 @@ MonoBehaviour:
   visibilityLayerMask:
     serializedVersion: 2
     m_Bits: 1
+--- !u!114 &114346802657199036
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694629572498086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf87a3ef50090b1499273c9edcde24b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  period: 1
+  damageToDeal: 1
 --- !u!114 &114538044107964894
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,7 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6
   closeThreshold: 0.25
-  disappearThreshold: 20
+  disappearThreshold: 15
 --- !u!114 &114830950818984602
 MonoBehaviour:
   m_ObjectHideFlags: 1

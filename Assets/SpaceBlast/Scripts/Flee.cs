@@ -109,6 +109,12 @@ public class Flee : MonoBehaviour
                 currentNode = node;
             }
         }
+
+        // If we are gonna go towards the player, rather just disappear
+        if (Vector3.Angle((currentNode.transform.position - transform.position).normalized, (thingToFlee.transform.position - transform.position).normalized) < 30.0f)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void StartFleeing(GameObject player)
