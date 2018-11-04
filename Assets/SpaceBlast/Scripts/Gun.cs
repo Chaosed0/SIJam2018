@@ -26,6 +26,7 @@ public class Gun : MonoBehaviour
     public bool dealDamage = false;
 
     public UnityEvent OnFire = new UnityEvent();
+    public UnityEvent OnFireWithDamage = new UnityEvent();
 
     public void Fire()
     {
@@ -35,6 +36,10 @@ public class Gun : MonoBehaviour
         }
 
         OnFire.Invoke();
+        if (dealDamage)
+        {
+            OnFireWithDamage.Invoke();
+        }
 
         List<RaycastHit> raycastHits = new List<RaycastHit>();
 
@@ -43,7 +48,7 @@ public class Gun : MonoBehaviour
             RaycastHit hitInfo;
             Vector3 axis = Quaternion.AngleAxis(Random.Range(0f, 360f), Vector3.forward) * Vector3.right;
             Quaternion rotation = Quaternion.AngleAxis(Random.Range(-spread, spread), axis);
-            bool localHit = Physics.Raycast(transform.position, rotation * facingSource.transform.forward, out hitInfo, 5.0f, layerMask, QueryTriggerInteraction.Ignore);
+            bool localHit = Physics.Raycast(transform.position, rotation * facingSource.transform.forward, out hitInfo, (dealDamage ? 10.0f : 5.0f), layerMask, QueryTriggerInteraction.Ignore);
 
             Debug.DrawLine(transform.position, transform.position + rotation * facingSource.transform.forward * 5.0f);
 

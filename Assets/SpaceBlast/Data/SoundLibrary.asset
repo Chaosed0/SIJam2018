@@ -81,4 +81,10 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 2dc405b2a3e795d4691a2eb403cd0662, type: 3}
   - name: Notification
     clips:
-    - {fileID: 8300000, guid: 6390b827ab8abae4ab93bcc8dc0e30b2, type: 3}
+    - {fileID: 8300000, guid: c3fc7977e67c9dd42be9d3dabcaf87c6, type: 3}
+  - name: SteamHiss
+    clips:
+    - {fileID: 8300000, guid: a2d0a648be3a78e4ebd0a4e1919922d3, type: 3}
+  - name: EngineFail
+    clips:
+    - {fileID: 8300000, guid: d00f9428c49e2214ea242ec9e11d2942, type: 3}

@@ -51,8 +51,8 @@ public class HeatSequence : MonoBehaviour
         started = true;
         lastStopTime = Time.time;
 
-        needsBlastSound = soundLibrary.GetSound("Notification");
-        afterBlastSound = soundLibrary.GetSound("Notification");
+        needsBlastSound = soundLibrary.GetSound("EngineFail");
+        afterBlastSound = soundLibrary.GetSound("SteamHiss");
 
         loopingSource.Play();
     }
