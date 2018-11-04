@@ -17,6 +17,9 @@ public class PlayerInput : MonoBehaviour
         player = Rewired.ReInput.players.GetPlayer(0);
 
         movement = GetComponent<Movement>();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -27,6 +30,7 @@ public class PlayerInput : MonoBehaviour
         float hLook = player.GetAxis("HorizontalLook");
         float vLook = player.GetAxis("VerticalLook");
         bool fire = player.GetButtonDown("Fire");
+        bool escape = player.GetButtonDown("Escape");
         bool ads = player.GetButton("Aim");
 
         movement.SetThrust(new Vector3(strafe, thrustVertical, thrust), hLook);
@@ -37,6 +41,15 @@ public class PlayerInput : MonoBehaviour
         {
             movement.DoBigThrust();
             gun.Fire();
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
+        if (escape)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 }
