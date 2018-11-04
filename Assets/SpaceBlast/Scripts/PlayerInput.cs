@@ -5,6 +5,9 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField]
     private CameraControl cameraControl;
+
+    [SerializeField]
+    private Gun gun;
     
     private Movement movement;
     private Rewired.Player player;
@@ -24,13 +27,16 @@ public class PlayerInput : MonoBehaviour
         float hLook = player.GetAxis("HorizontalLook");
         float vLook = player.GetAxis("VerticalLook");
         bool fire = player.GetButtonDown("Fire");
+        bool ads = player.GetButton("Aim");
 
         movement.SetThrust(new Vector3(strafe, thrustVertical, thrust), hLook);
         cameraControl.Pitch(vLook);
+        cameraControl.SetAds(ads);
 
         if (fire)
         {
             movement.DoBigThrust();
+            gun.Fire();
         }
     }
 }

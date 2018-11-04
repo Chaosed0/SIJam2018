@@ -57,7 +57,8 @@
 
 				for (int j = 0; j < blurIterations; j++) 
 				{
-					float2 samplePosition = i.uv + float2((j - .5 * blurIterations) * _MainTex_TexelSize.x * (6.0 * (j / blurIterations)), 0);
+					float thing = j/blurIterations;
+					float2 samplePosition = i.uv + float2((j - .5 * blurIterations) * _MainTex_TexelSize.x * 6.0, 0);
 					colorAmount += tex2D(_MainTex, samplePosition).r / blurIterations;
 					outlineDepthSample = max(outlineDepthSample, tex2D(_OutlineDepthBuffer, samplePosition).x);
 				}
@@ -133,7 +134,8 @@
 				for (int j = 0; j < blurIterations; j++) 
 				{
 					// Render texture is upside down for some reason
-					colorAmount += tex2D(_GrabTexture, grabUv + float2(0, (j - .5 * blurIterations) * _GrabTexture_TexelSize.y * (6.0 * (j / blurIterations)))).r / blurIterations;
+					float thing = j / blurIterations;
+					colorAmount += tex2D(_GrabTexture, grabUv + float2(0, (j - .5 * blurIterations) * _GrabTexture_TexelSize.y * 6.0)).r / blurIterations;
 				}
 
 				return lerp(tex2D(_SceneTex, i.uv), lerp(_OutlineColor, _InnerColor, colorAmount * 2), colorAmount * _OutlineStrength);

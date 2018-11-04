@@ -52,6 +52,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void OnHit(GameObject player)
+    {
+        // ChangeState(State.Fleeing);
+        Destroy(this.gameObject);
+    }
+
     void Update()
     {
     }
