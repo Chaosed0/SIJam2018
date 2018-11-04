@@ -15207,6 +15207,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a20197282b0cf7942ae3661162dd4fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Enemy+StateChangedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &1565548332
 MonoBehaviour:
   m_ObjectHideFlags: 0

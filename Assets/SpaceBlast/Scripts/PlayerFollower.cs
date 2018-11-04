@@ -86,11 +86,20 @@ public class PlayerFollower : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = facing.normalized * speed;
+        if (facing.sqrMagnitude > Mathf.Epsilon)
+        {
+            rb.velocity = facing.normalized * speed;
+        }
     }
 
     public void SetTarget(GameObject target)
     {
+        if (target == null)
+        {
+            rb.velocity = Vector3.zero;
+            facing = Vector3.zero;
+        }
+
         this.target = target;
     }
 }

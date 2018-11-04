@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 114538044107964894}
   - component: {fileID: 114830950818984602}
   - component: {fileID: 54957000625973888}
+  - component: {fileID: 114582189739324438}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -204,6 +205,20 @@ MonoBehaviour:
   speed: 4
   repathInterval: 3
   closeDistance: 0.5
+--- !u!114 &114582189739324438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1694629572498086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a219923ac7d894e4687c7f34cadf0f71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 6
+  closeThreshold: 0.25
+  disappearThreshold: 20
 --- !u!114 &114830950818984602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -215,6 +230,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a20197282b0cf7942ae3661162dd4fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: Enemy+StateChangedEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!135 &135242479954862524
 SphereCollider:
   m_ObjectHideFlags: 1
