@@ -73,6 +73,23 @@ public class Gun : MonoBehaviour
             return;
         }
 
+        Astronaut astronaut = rigidbody.GetComponentInParent<Astronaut>();
+        if (astronaut != null)
+        {
+            Health astroHealth = astronaut.GetComponent<Health>();
+            if (astroHealth.GetHealth() > 0f)
+            {
+                astroHealth.AddHealth(-9999f);
+                foreach (Rigidbody childrb in astronaut.gameObject.GetComponentsInChildren<Rigidbody>())
+                {
+                    childrb.AddForceAtPosition((rigidbody.transform.position - this.transform.position).normalized * 100.0f, hit.point, ForceMode.Force);
+                }
+            }
+
+            rigidbody.AddForceAtPosition((rigidbody.transform.position - this.transform.position).normalized * 1000.0f, hit.point, ForceMode.Force);
+            return;
+        }
+
         Enemy enemy = rigidbody.GetComponent<Enemy>();
         if (enemy != null)
         {
