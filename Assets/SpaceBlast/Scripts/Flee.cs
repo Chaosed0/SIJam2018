@@ -16,15 +16,18 @@ public class Flee : MonoBehaviour
     private Rigidbody rb;
     private Pathfinder pathfinder;
 
+    private bool isFleeing = false;
     GameObject thingToFlee = null;
 
     LevelGraph levelGraph;
-    Node currentNode = null;
+    public Node currentNode { get; private set; }
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         pathfinder = GetComponent<Pathfinder>();
+
+        currentNode = null;
     }
 
     private void Start()
@@ -38,8 +41,9 @@ public class Flee : MonoBehaviour
 
     void Update()
     {
-        if (currentNode != null)
+        if (isFleeing)
         {
+            Debug.Assert(currentNode != null);
             Vector3 relativeToPlayer = thingToFlee.transform.position - transform.position;
             if (relativeToPlayer.sqrMagnitude > disappearThreshold * disappearThreshold)
             {
@@ -57,8 +61,9 @@ public class Flee : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentNode != null)
+        if (isFleeing)
         {
+            Debug.Assert(currentNode != null);
             Vector3 relativeToNode = currentNode.transform.position - transform.position;
             rb.velocity = relativeToNode.normalized * speed;
         }
@@ -117,9 +122,16 @@ public class Flee : MonoBehaviour
         }
     }
 
-    public void StartFleeing(GameObject player)
+    public void PrepareFlee(GameObject player)
     {
         thingToFlee = player;
         FindNewNode();
+    }
+
+    public void StartFleeing()
+    {
+        Debug.Assert(thingToFlee != null);
+        Debug.Assert(currentNode != null);
+        isFleeing = true;
     }
 }

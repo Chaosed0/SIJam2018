@@ -33,16 +33,17 @@ public class Gun : MonoBehaviour
 
     void OnHitAction(RaycastHit hitInfo)
     {
-        Enemy enemy = hitInfo.collider.GetComponent<Enemy>();
+        Rigidbody rigidbody = hitInfo.collider.attachedRigidbody;
+
+        Enemy enemy = rigidbody.GetComponent<Enemy>();
         if (enemy != null)
         {
             enemy.OnHit(gameObject);
         }
 
-        Rigidbody rb = hitInfo.collider.GetComponent<Rigidbody>();
-        if (rb != null)
+        if (rigidbody != null)
         {
-            rb.AddForceAtPosition((rb.transform.position - this.transform.position).normalized * forceImparted, hitInfo.point, ForceMode.Force);
+            rigidbody.AddForceAtPosition((rigidbody.transform.position - this.transform.position).normalized * forceImparted, hitInfo.point, ForceMode.Force);
         }
     }
 }

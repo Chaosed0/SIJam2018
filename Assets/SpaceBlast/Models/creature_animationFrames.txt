@@ -1,0 +1,3 @@
+10-40 floating
+50-80 attacking
+90-110 hitstun

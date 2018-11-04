@@ -7,11 +7,22 @@ using System.Collections;
 [RequireComponent(typeof(Attack))]
 public class Enemy : MonoBehaviour
 {
+    [SerializeField]
+    private Animator animator;
+
+    [SerializeField]
+    private Rigidbody rb;
+
+    [SerializeField]
+    private float hitstunTime = 0.5f;
+
     private PlayerFollower playerFollower;
     private Attack attack;
     private GameObject player;
     private float attackingDistance = 2.0f;
     private Flee flee;
+    private float onHitstunTime;
+    private Quaternion onHitstunFacing;
 
     [System.Serializable]
     public class StateChangedEvent : UnityEvent<State> { };
@@ -21,6 +32,7 @@ public class Enemy : MonoBehaviour
     {
         Following,
         Attacking,
+        Hitstun,
         Fleeing
     }
 
@@ -58,6 +70,7 @@ public class Enemy : MonoBehaviour
             else if (oldState == State.Attacking)
             {
                 attack.SetTarget(null);
+                animator.SetBool("IsAttacking", false);
             }
 
             if (newState == State.Following)
@@ -67,10 +80,18 @@ public class Enemy : MonoBehaviour
             else if (newState == State.Attacking)
             {
                 attack.SetTarget(player.GetComponent<Health>());
+                animator.SetBool("IsAttacking", true);
+            }
+            else if (newState == State.Hitstun)
+            {
+                onHitstunTime = Time.time;
+                onHitstunFacing = transform.rotation;
+                flee.PrepareFlee(player);
+                animator.SetBool("IsFleeing", true);
             }
             else if (newState == State.Fleeing)
             {
-                flee.StartFleeing(player);
+                flee.StartFleeing();
             }
 
             OnStateChanged.Invoke(newState);
@@ -79,7 +100,10 @@ public class Enemy : MonoBehaviour
 
     public void OnHit(GameObject player)
     {
-        ChangeState(State.Fleeing);
+        if (state != State.Hitstun && state != State.Fleeing)
+        {
+            ChangeState(State.Hitstun);
+        }
     }
 
     void Update()
@@ -94,5 +118,20 @@ public class Enemy : MonoBehaviour
         {
             ChangeState(State.Following);
         }
+
+        if (state == State.Hitstun)
+        {
+            float lerp = (Time.time - onHitstunTime) / hitstunTime;
+            transform.rotation = Quaternion.Slerp(onHitstunFacing, Quaternion.LookRotation(flee.currentNode.transform.position - transform.position), lerp);
+            if (lerp > 1.0f)
+            {
+                ChangeState(State.Fleeing);
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        animator.SetFloat("Speed", rb.velocity.magnitude / 4.0f);
     }
 }

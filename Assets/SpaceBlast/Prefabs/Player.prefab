@@ -405,7 +405,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 5431
+    m_Bits: 7479
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -543,9 +543,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916c9d672ab15d842a6e5c16a81f1cb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: {fileID: 114331617520900282}
   heatImagingCam: {fileID: 1036364289384648}
   blue: {fileID: 114677838532114114}
   normalPixelation: {fileID: 114394796188091040}
+  hitRollMin: 10
+  hitRollMax: 15
+  rollRecovery: 15
 --- !u!114 &114100639616102616
 MonoBehaviour:
   m_ObjectHideFlags: 1
