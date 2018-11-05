@@ -39,7 +39,10 @@ public class PlayerInput : MonoBehaviour
 
         if (fire)
         {
-            movement.DoBigThrust();
+            if (gun.canFire)
+            {
+                movement.DoBigThrust();
+            }
             gun.Fire();
 
             Cursor.lockState = CursorLockMode.Locked;

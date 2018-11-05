@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Playables;
 using System.Collections;
 
 public class Player : MonoBehaviour
@@ -18,6 +19,12 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private CameraControl cameraControl;
+
+	[SerializeField]
+	private PlayableDirector win;
+
+	[SerializeField]
+	private PlayableDirector lose;
 
     public bool gunEnabled = false;
     public bool scopeEnabled = false;
@@ -69,4 +76,14 @@ public class Player : MonoBehaviour
             OnKillEnabled.Invoke();
         }
     }
+
+	public void Win()
+	{
+		win.Play ();
+	}
+
+	public void Lose()
+	{
+		lose.Play();
+	}
 }

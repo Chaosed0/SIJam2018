@@ -1272,6 +1272,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onceOnly: 0
 --- !u!114 &114106158532498106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1567,6 +1568,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onceOnly: 0
 --- !u!114 &114134512755186780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2168,6 +2170,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onceOnly: 0
 --- !u!114 &114386329513708400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2463,6 +2466,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onceOnly: 0
 --- !u!114 &114441760613236478
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2479,6 +2483,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onceOnly: 0
 --- !u!114 &114465370895190502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2850,6 +2855,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onceOnly: 0
 --- !u!114 &114609871077044692
 MonoBehaviour:
   m_ObjectHideFlags: 1
