@@ -43,7 +43,8 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				return fixed4(tex2D(_MainTex, i.uv).a, 1, 1, 1);
+				//return fixed4(tex2D(_MainTex, i.uv).a, 1, 1, 1);
+				return fixed4(1, 1, 1, 1);
 			}
 			ENDCG
 		}

@@ -88,3 +88,9 @@ MonoBehaviour:
   - name: EngineFail
     clips:
     - {fileID: 8300000, guid: d00f9428c49e2214ea242ec9e11d2942, type: 3}
+  - name: EngineSuccess
+    clips:
+    - {fileID: 8300000, guid: 43b9c88e8daa79e4092145f446ab6bc2, type: 3}
+  - name: Pickup
+    clips:
+    - {fileID: 8300000, guid: 3055534f4395cee48b69c2fc2f21895c, type: 3}

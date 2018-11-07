@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using System.Collections;
 
 public class HeatSequence : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class HeatSequence : MonoBehaviour
     private SoundLibrary soundLibrary;
 
     [SerializeField]
-    private AudioSource source;
+    private AudioSourceGroup sourceGroup;
 
     [SerializeField]
     private AudioSource loopingSource;
@@ -41,6 +42,7 @@ public class HeatSequence : MonoBehaviour
     public UnityEvent OnFinished = new UnityEvent();
 
     private SoundLibrary.Sound needsBlastSound;
+    private SoundLibrary.Sound sequenceEndSound;
     private SoundLibrary.Sound afterBlastSound;
 
     private HashSet<BlastReceiver> blastList = new HashSet<BlastReceiver>();
@@ -52,6 +54,7 @@ public class HeatSequence : MonoBehaviour
         lastStopTime = Time.time;
 
         needsBlastSound = soundLibrary.GetSound("EngineFail");
+        sequenceEndSound = soundLibrary.GetSound("EngineSuccess");
         afterBlastSound = soundLibrary.GetSound("SteamHiss");
 
         loopingSource.Play();
@@ -78,7 +81,7 @@ public class HeatSequence : MonoBehaviour
             stopped = true;
             loopingSource.Pause();
 
-            Play(source, needsBlastSound.GetRandom());
+            Play(sourceGroup.Get(), needsBlastSound.GetRandom());
         }
     }
 
@@ -103,7 +106,10 @@ public class HeatSequence : MonoBehaviour
         }
 
         thing.heater.layer = 0;
-        Play(source, afterBlastSound.GetRandom());
+        StartCoroutine(DoAfterSeconds(0.5f, () =>
+        {
+            Play(sourceGroup.Get(), afterBlastSound.GetRandom());
+        }));
 
         if (blastList.Count == 0)
         {
@@ -116,11 +122,18 @@ public class HeatSequence : MonoBehaviour
             else
             {
                 started = false;
+                Play(sourceGroup.Get(), sequenceEndSound.GetRandom());
                 OnFinished.Invoke();
             }
 
             loopingSource.Play();
         }
+    }
+
+    private IEnumerator DoAfterSeconds(float delay, System.Action action)
+    {
+        yield return new WaitForSeconds(delay);
+        action();
     }
 
     private void Play(AudioSource source, AudioClip clip)

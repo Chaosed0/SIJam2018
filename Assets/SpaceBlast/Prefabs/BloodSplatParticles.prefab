@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198822355127874654}
   - component: {fileID: 199099805656549178}
   - component: {fileID: 114306370861472924}
-  m_Layer: 9
+  m_Layer: 11
   m_Name: BloodSplatParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1635629378122546}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 44.272, y: 0.814, z: 21.41}
+  m_LocalPosition: {x: 51.426563, y: 0.000002633893, z: 30.863344}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

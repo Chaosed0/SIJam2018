@@ -11,6 +11,9 @@ public class PlayerSound : MonoBehaviour
     private Movement movement;
 
     [SerializeField]
+    private Player player;
+
+    [SerializeField]
     private SoundLibrary soundLibrary;
 
     [SerializeField]
@@ -46,6 +49,7 @@ public class PlayerSound : MonoBehaviour
     private float nextAmbientScreechTime = 0f;
 
     private SoundLibrary.Sound heavyGunBlast;
+    private SoundLibrary.Sound pickup;
     private SoundLibrary.Sound gunBlast;
     private SoundLibrary.Sound jetBlast;
     private SoundLibrary.Sound enemyFarAlert;
@@ -54,14 +58,23 @@ public class PlayerSound : MonoBehaviour
     {
         gun.OnFire.AddListener(OnGunFire);
         movement.OnAccelerationChanged.AddListener(OnAccelerationChanged);
+        player.OnGunEnabled.AddListener(OnPickup);
+        player.OnScopeEnabled.AddListener(OnPickup);
+        player.OnKillEnabled.AddListener(OnPickup);
 
         lastAmbientScreechTime = Time.time;
         nextAmbientScreechTime = Random.Range(ambientScreechMin, ambientScreechMax);
 
         heavyGunBlast = soundLibrary.GetSound("HeavyGunBlast");
+        pickup = soundLibrary.GetSound("Pickup");
         gunBlast = soundLibrary.GetSound("GunBlast");
         jetBlast = soundLibrary.GetSound("JetBlast");
         enemyFarAlert = soundLibrary.GetSound("EnemyFarAlert");
+    }
+
+    private void OnPickup()
+    {
+        Play(gunBlastAudioSource.Get(), pickup.GetRandom());
     }
 
     private void OnGunFire()
@@ -87,7 +100,7 @@ public class PlayerSound : MonoBehaviour
 
         if (newAcceleration.sqrMagnitude > Mathf.Epsilon && oldAcceleration.sqrMagnitude < Mathf.Epsilon)
         {
-            moveContinuousJetAudioSource.volume = newAcceleration.magnitude * 0.4f;
+            moveContinuousJetAudioSource.volume = newAcceleration.magnitude * 0.25f;
             moveContinuousJetAudioSource.Play();
         }
         else if (newAcceleration.sqrMagnitude < Mathf.Epsilon && oldAcceleration.sqrMagnitude > Mathf.Epsilon)

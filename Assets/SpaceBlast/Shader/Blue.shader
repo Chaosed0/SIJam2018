@@ -21,7 +21,7 @@
 				float4 tex = tex2D(_MainTex, i.uv);
 				tex.r = 0.0;
 				tex.g = 0.0;
-				tex.b = clamp(tex.b * 0.5, 0.0, 0.1);
+				tex.b = clamp(tex.b * 0.3, 0.05, 0.1);
 				return tex;
 			}
 			ENDCG

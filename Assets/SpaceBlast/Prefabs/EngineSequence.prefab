@@ -2775,7 +2775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundLibrary: {fileID: 11400000, guid: 14716a8fae258554b81896f3e349d92d, type: 2}
-  source: {fileID: 82617558634075120}
+  sourceGroup: {fileID: 0}
   loopingSource: {fileID: 82208803003785248}
   stops:
   - time: 5
@@ -2936,6 +2936,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: PlayerTrigger+PlayerEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+  enterOnceOnly: 1
+  exitOnceOnly: 1
 --- !u!114 &114817479534092558
 MonoBehaviour:
   m_ObjectHideFlags: 1

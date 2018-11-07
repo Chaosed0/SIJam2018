@@ -90,7 +90,8 @@ public class Pathfinder : MonoBehaviour
     public bool CanTraverse(Vector3 from, Vector3 to)
     {
         Vector3 relative = to - from;
-        bool hit = Physics.BoxCast(from, new Vector3(0.5f, 0.5f, 0.01f), relative.normalized, Quaternion.LookRotation(relative.normalized), relative.magnitude, visibilityLayerMask, QueryTriggerInteraction.Ignore);
+        RaycastHit hitInfo;
+        bool hit = Physics.SphereCast(from, 0.75f, relative.normalized, out hitInfo, relative.magnitude, visibilityLayerMask, QueryTriggerInteraction.Ignore);
         return !hit;
     }
 

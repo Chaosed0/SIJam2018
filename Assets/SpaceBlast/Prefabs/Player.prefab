@@ -1088,7 +1088,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 1db3c95db0208ad439d568f05a04b1c6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.25
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1727,7 +1727,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 15159
-  forceImparted: 20000
+  forceImparted: 5000
   spread: 10
   canFire: 0
   dealDamage: 0
@@ -1828,7 +1828,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1874,6 +1874,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gun: {fileID: 114100639616102616}
   movement: {fileID: 114673559046865092}
+  player: {fileID: 114516168052376140}
   soundLibrary: {fileID: 11400000, guid: 14716a8fae258554b81896f3e349d92d, type: 2}
   gunBlastAudioSource: {fileID: 114057523514387052}
   moveBlastJetAudioSource: {fileID: 82319336199379482}
@@ -2135,12 +2136,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d843be97da6af47bbc92daa83f9d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outlineBufferShader: {fileID: 4800000, guid: b07392cd70eb1ad4e87bd7267130cbd2, type: 3}
   preOutlineBuffer: {fileID: 0}
-  preOutlineDepthBuffer: {fileID: 0}
   layerMask:
     serializedVersion: 2
     m_Bits: 2048
   outlineMat: {fileID: 2100000, guid: f1959f0f1541f6e42ad5844646c37e8b, type: 2}
+  saveImg: 0
 --- !u!114 &114704495753004516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2188,8 +2190,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -11726,7 +11728,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00036621094, y: 0.0004272461}
+  m_AnchoredPosition: {x: -0.00048828125, y: 0.00048828125}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224400260418347564
@@ -11920,7 +11922,7 @@ PlayableDirector:
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
   m_SceneBindings:
-  - key: {fileID: 114080608839230170, guid: 644708803e47d144fa4f572f42fc1a84, type: 2}
+  - key: {fileID: 0}
     value: {fileID: 0}
   - key: {fileID: 114080608839230170, guid: ab9d1aa3a0a19364b87c19a89fc2c1a7, type: 2}
     value: {fileID: 95817971119951166}
