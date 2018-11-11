@@ -8,7 +8,7 @@ QualitySettings:
   m_QualitySettings:
   - serializedVersion: 2
     name: Spooky
-    pixelLightCount: 4
+    pixelLightCount: 32
     shadows: 2
     shadowResolution: 2
     shadowProjection: 1
