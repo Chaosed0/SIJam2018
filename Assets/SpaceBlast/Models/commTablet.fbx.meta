@@ -4,11 +4,18 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: commtablet
     400000: //RootNode
+    400002: commtablet
     2100000: lambert1
+    2100002: wall_m
+    2100004: emissive_m
     2300000: //RootNode
+    2300002: commtablet
     3300000: //RootNode
+    3300002: commtablet
     4300000: monitor
+    4300002: commtablet
   externalObjects: {}
   materials:
     importMaterials: 1

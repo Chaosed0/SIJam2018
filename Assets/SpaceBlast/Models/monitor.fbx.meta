@@ -4,11 +4,21 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: monitorMain
     400000: //RootNode
+    400002: monitorMain
     2100000: lambert1
+    2100002: wallBolts_m
+    2100004: redbox_m
+    2100006: vent_m
+    2100008: wall_m
+    2100010: emissive_m
     2300000: //RootNode
+    2300002: monitorMain
     3300000: //RootNode
+    3300002: monitorMain
     4300000: monitor
+    4300002: monitorMain
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -40,7 +50,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 70
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
     importVisibility: 1

@@ -4,10 +4,14 @@ ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: doorway
     400000: //RootNode
+    400002: doorway
     2100000: doorway_m
     2300000: //RootNode
+    2300002: doorway
     3300000: //RootNode
+    3300002: doorway
     4300000: doorway
   externalObjects: {}
   materials:
