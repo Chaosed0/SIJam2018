@@ -15,7 +15,6 @@ public class BlastReceiver : MonoBehaviour
 		if (onceOnly && blasted) {
 			return;
 		}
-		Debug.Log ("blast " + this.name, this);
 		blasted = true;
         OnBlasted.Invoke();
     }
