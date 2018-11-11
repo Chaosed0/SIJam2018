@@ -119,6 +119,7 @@ public class Flee : MonoBehaviour
         if (Vector3.Angle((currentNode.transform.position - transform.position).normalized, (thingToFlee.transform.position - transform.position).normalized) < 30.0f)
         {
             Destroy(this.gameObject);
+            return;
         }
     }
 
