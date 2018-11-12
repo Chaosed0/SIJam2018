@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4627242280455762}
   - component: {fileID: 33712667996312300}
   - component: {fileID: 23711234704645770}
-  - component: {fileID: 65252351398586286}
   m_Layer: 0
   m_Name: pipeSmall
   m_TagString: Untagged
@@ -84,15 +83,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1445252055777114}
   m_Mesh: {fileID: 4300000, guid: 9d123b5a62dfcc440adbe322bb26a0ae, type: 3}
---- !u!65 &65252351398586286
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1445252055777114}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.23751402, y: 0.27781248, z: 4.0677814}
-  m_Center: {x: 0, y: 0, z: 0}
